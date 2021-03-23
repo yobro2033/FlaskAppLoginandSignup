@@ -3,9 +3,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('simple_form.html')
+    return 'home page'
 
-@app.route('/reply')
-def reply():
+@app.route('/form')
+def form():
     name = request.args.get('name', '')
-    return 'hello ' + name
+    if name == '':
+        return render_template('simple_form.html')
+    else:
+        return 'hello ' + name
