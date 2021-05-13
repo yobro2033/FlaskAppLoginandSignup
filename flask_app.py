@@ -14,6 +14,10 @@ def login():
 def signup():
     return render_template('simple_form.html')
 
+@app.route('/tos')
+def tos():
+	return render_template('termsofservice.html')
+
 @app.route('/insert', methods=['POST'])
 def hello():
     name = request.form['name']
