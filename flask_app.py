@@ -56,8 +56,7 @@ def verify():
 	cur.execute(	"SELECT * FROM Users WHERE Name=? AND Email=? AND Password=?",
     		       (request.form['name'],request.form['email'],request.form['password']))
 	result = cur.fetchall()
-	resultFinal = str(result)
-	if len(resultFinal) == 0:
+	if len(result) == 0:
 		return 'Your information submitted is not registered or incorrect!'
 	else:
 	    return 'You are logged in, ' + request.form['name'] + '!'
