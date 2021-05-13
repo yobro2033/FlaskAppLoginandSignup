@@ -18,6 +18,19 @@ def signup():
 def tos():
 	return render_template('termsofservice.html')
 
+@app.route('/create')
+def create():
+	con = sqlite3.connect('login.db')
+	cur = con.cursor()
+	cur.execute(	"""	CREATE TABLE Users(
+	                                Name VARCHAR(20) NOT NULL,
+					Username VARCHAR(50) NOT NULL PRIMARY KEY,
+					Password VARCHAR(20) NOT NULL
+						  )
+			""")
+	con.commit()
+	return 'CREATE'
+
 @app.route('/insert', methods=['POST'])
 def hello():
     name = request.form['name']
