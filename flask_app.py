@@ -59,7 +59,7 @@ def verify():
 	if len(result) == 0:
 		return 'Your information submitted is not registered or incorrect!'
 	else:
-	    return 'You are logged in, ' + request.form['name'] + '!'
+		return 'You are logged in, ' + request.form['name'] + '!'
 
 
 
