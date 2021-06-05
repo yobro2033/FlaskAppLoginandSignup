@@ -120,5 +120,7 @@ def verify():
 	if len(result) == 0:
 		return {'success': False, 'error': "The information you entered is incorrect!"}
 	else:
-		return {'success': True, 'error': "Welcome to PriceComparision!"}
+		session.permanent = True
+		session['username'] = request.form['username']
+		return {'success': True, 'error': "Welcome!"}
 
