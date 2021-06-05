@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request
-app = Flask(__name__)
+from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 from passlib.hash import sha256_crypt
+from markupsafe import escape
+from datetime import timedelta
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(16)
+app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=1)
 
 @app.route('/')
 def home():
