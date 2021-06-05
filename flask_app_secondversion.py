@@ -124,3 +124,13 @@ def verify():
 		session['username'] = request.form['username']
 		return {'success': True, 'error': "Welcome!"}
 
+@app.route('/un')
+def un():
+	if 'username' in session:
+		return 'Logged in as %s' % escape(session['username'])
+	return 'You are not logged in'
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('un'))
