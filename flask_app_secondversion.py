@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
+import os
 from passlib.hash import sha256_crypt
 from markupsafe import escape
 from datetime import timedelta
@@ -38,26 +39,26 @@ def create():
 
 @app.route('/insert', methods=['POST'])
 def hello():
-        try:
-		con = sqlite3.connect('login.db')
-		cur = con.cursor()
-		username = request.form['username']
-		password = request.form['password']
-		if email.strip() == "" OR password.strip() == "":
-			return {'success': False, 'error': "You have not filled in all of the fields."}
-		checkPassword = passwordValidator(password)
-		if checkpassword['success'] == False:
-			print(checkpassword['error'])
-			return {'success': False}
-		cursor.execute("SELECT Username FROM Users WHERE Username = ?", (username,))
-		data = cursor.fetchall()
-		while len(data) != 0:
-			return {'success': False, 'error': "This username already exists."}
-		cur.execute("INSERT INTO Users (Username, Password) VALUES (?,?)",(username,password))
-		con.commit()
-		return '<p>Thank you for registering account with us! </p>'
-        except Exception as e:
-		return {'success': False, 'error': type(e).__name__}
+    try:
+      con = sqlite3.connect('login.db')
+      cur = con.cursor()
+      username = request.form['username']
+      password = request.form['password']
+      if email.strip() == "" or password.strip() == "":
+        return {'success': False, 'error': "You have not filled in all of the fields."}
+      checkPassword = passwordValidator(password)
+      if checkpassword['success'] == False:
+        print(checkpassword['error'])
+        return {'success': False}
+      cursor.execute("SELECT Username FROM Users WHERE Username = ?", (username,))
+      data = cursor.fetchall()
+      while len(data) != 0:
+        return {'success': False, 'error': "This username already exists."}
+      cur.execute("INSERT INTO Users (Username, Password) VALUES (?,?)",(username,password))
+      con.commit()
+      return {'success': True, 'error': "Thank for registering account with us!"}
+    except Exception as e:
+		    return {'success': False, 'error': type(e).___name___}
 
 def passwordValidator(password):
 	if len(password) >= 8:
@@ -77,7 +78,7 @@ def passwordValidator(password):
 			int(char)
 			hashNumber = True
 			break
-		exceptp:
+		except:
 			pass
 	if hashNumber == True:
 		pass
